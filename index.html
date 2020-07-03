@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue conditional output</title>
+    <!-- development version, includes helpful console warnings
+         從https://vuejs.org/v2/guide/ ，vue documentation取得
+         development version，上線要用production ver才會輕巧且不會有console warnings
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <!-- showName是一個boolean data(true/false)
+             v-if會依據某boolean data來決定是否render該標籤的content
+         -->
+        <!-- browser若觀察element會發現，false時候會被渲染成一個comment註解狀態
+             vue-instance data也會連動
+         -->
+        <p v-if="showName">Mario</p>
+        <!-- 若接下面這個，則與上面這條是各自獨立，就算上面True下面這條也會去執行判斷是否render
+             <p v-if="showAge">25</p>
+        -->
+        <!-- else-if會隨著上面的if statement，若showName成立則不管下面為何都不會去判斷
+             這種機制可以用於譬如有logged登入狀態，譬如未登入情況下一些hidden info不管如何都不會去觸發顯示
+         -->
+        <p v-else-if="showAge">25</p>
+
+        <!-- 用來控制showName boolean的toggle切換鍵
+             並顯示他的狀態於按鈕上，data可以綁定同時多個地方
+         -->
+        <button @click="toggleName">ShowName {{ showName }}</button>
+        <button @click="toggleAge">ShowAge {{ showAge }}</button>
+    </div>
+    <script src="app.js" type="text/javascript"></script>
+</body>
+</html>
